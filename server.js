@@ -1,5 +1,6 @@
 var express = require('express');
 var multer  = require('multer');
+var opts = { cache: false}
 var ext = require('file-extension');
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -25,22 +26,22 @@ app.get('/api/users', function(req, res) {
     {
       user: {
         username: "Josuechandiasto",
-        avatar: "https://scontent-mia1-1.xx.fbcdn.net/v/t1.0-9/13165867_794013114068267_1775816724890012358_n.jpg?oh=e4f3332b0464fa55a23c5bb5e66d051e&oe=57DCD979",
+        avatar: "foto 0.jpg",
         description: "Me gusta la Programación, El Desarrollo Web, me atrae la Robotica y las Matematicas"
       },
       post:
         [{
-          url: "../post (1).jpg",
+          url: "post (1).jpg",
           likes: 1,
           liked: false,
           createdAt: new Date()
         }, {
-          url: "../post (2).jpg",
+          url: "post (2).jpg",
           likes: 0,
           liked: true,
           createdAt: new Date()
         },{
-          url: "../post (3).jpg",
+          url: "post (3).jpg",
           likes: 2,
           liked: true,
           createdAt: new Date()
@@ -49,22 +50,22 @@ app.get('/api/users', function(req, res) {
     {
       user: {
         username: "Platzi",
-        avatar: "../foto 1.jpg",
+        avatar: "foto 1.jpg",
         description: "Platzi Cursos de diseño, marketing y desarrollo web/móvil en la mejor experiencia de educación online. | Usa el HT #Platzi goo.gl/f1a0yA"
       },
       post:
         [{
-          url: "../post (4).jpg",
+          url: "post (4).jpg",
           likes: 10,
           liked: true,
           createdAt: new Date()
         },{
-          url: "../post (5).jpg",
+          url: "post (5).jpg",
           likes: 9,
           liked: true,
           createdAt: new Date()
         },{
-          url: "../post (6).jpg",
+          url: "post (6).jpg",
           likes: 3,
           liked: true,
           createdAt: new Date()
@@ -73,9 +74,9 @@ app.get('/api/users', function(req, res) {
   ];
   setTimeout(function() {
     res.send(pictures)
-  }, 2000);
+  },0);
 })
-app.post('/api/users', function(req , res) {
+app.post('/api/pictures', function(req , res) {
   upload(req, res, function(err) {
     if (err) {
       return res.send(500, "Error uploading file");
@@ -90,8 +91,9 @@ app.get('/signup', function(req, res) {
 app.get('/user/:u', function(req, res) {
   res.render('user', { title:req.params.u})
 })
-
-
+app.get('/post/:p', function(req, res) {
+  res.render('user', { title: req.params.p})
+})
 app.get('/signin', function(req, res) {
   res.render('index')
 })
